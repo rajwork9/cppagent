@@ -245,12 +245,10 @@ set(AGENT_SOURCES
 # src/sink/mqtt_sink HEADER_FILE_ONLY
 
         "${SOURCE_DIR}/sink/mqtt_sink/mqtt_service.hpp"
-		"${SOURCE_DIR}/sink/mqtt_sink/mqtt2_service.hpp"
 
 #src/sink/mqtt_sink SOURCE_FILES_ONLY
 
         "${SOURCE_DIR}/sink/mqtt_sink/mqtt_service.cpp"
-		"${SOURCE_DIR}/sink/mqtt_sink/mqtt2_service.cpp"
         
 # src/sink/rest_sink HEADER_FILE_ONLY
         
@@ -438,10 +436,10 @@ endif()
 
 target_sources(agent_lib PUBLIC FILE_SET headers
   TYPE HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../src/"
-  FILES "${AGENT_LIB_HEADERS}")
+  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../src/" "${PROJECT_BINARY_DIR}/agent_lib/"
+  FILES "${AGENT_LIB_HEADERS}" "${PROJECT_BINARY_DIR}/agent_lib/mtconnect/version.h")
+  
 
-install(TARGETS agent_lib LIBRARY DESTINATION "lib")
-install(TARGETS agent_lib ARCHIVE DESTINATION "lib")
-install(TARGETS agent_lib FILE_SET  headers DESTINATION "include")
-install(FILES "${PROJECT_BINARY_DIR}/agent_lib/mtconnect/version.h" DESTINATION "include/mtconnect")
+install(TARGETS agent_lib LIBRARY)
+install(TARGETS agent_lib ARCHIVE)
+install(TARGETS agent_lib FILE_SET headers PUBLIC_HEADER)

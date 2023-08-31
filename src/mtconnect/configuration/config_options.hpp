@@ -34,8 +34,10 @@ namespace mtconnect {
 
     /// @name Global Configuration Options
     ///@{
-    DECLARE_CONFIGURATION(ExecDirectory);
     DECLARE_CONFIGURATION(WorkingDirectory);
+    DECLARE_CONFIGURATION(DataPath);
+    DECLARE_CONFIGURATION(ConfigPath);
+    DECLARE_CONFIGURATION(PluginPath);
     ///@}
 
     /// @name Agent Configuration
@@ -119,6 +121,7 @@ namespace mtconnect {
     DECLARE_CONFIGURATION(SuppressIPAddress);
     DECLARE_CONFIGURATION(Topics);
     DECLARE_CONFIGURATION(UUID);
+    DECLARE_CONFIGURATION(Uuid);
     DECLARE_CONFIGURATION(UpcaseDataItemValue);
     DECLARE_CONFIGURATION(Url);
     DECLARE_CONFIGURATION(UsePolling);

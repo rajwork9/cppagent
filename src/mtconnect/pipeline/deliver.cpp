@@ -114,7 +114,7 @@ namespace mtconnect {
           }
         }
 
-        using boost::placeholders::_1;
+        using std::placeholders::_1;
         m_timer.expires_from_now(10s);
         m_timer.async_wait(
             boost::asio::bind_executor(m_strand, boost::bind(&ComputeMetrics::compute, ptr(), _1)));
@@ -131,6 +131,19 @@ namespace mtconnect {
 
       m_contract->deliverAsset(a);
       (*m_count)++;
+
+      return entity;
+    }
+
+    EntityPtr DeliverDevice::operator()(entity::EntityPtr &&entity)
+    {
+      auto d = std::dynamic_pointer_cast<device_model::Device>(entity);
+      if (!d)
+      {
+        throw EntityError("Unexpected entity type, cannot convert to asset in DeliverAsset");
+      }
+
+      m_contract->deliverDevice(d);
 
       return entity;
     }
